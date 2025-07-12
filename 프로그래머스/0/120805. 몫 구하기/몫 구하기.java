@@ -1,12 +1,28 @@
 class Solution {
+
     public int solution(int num1, int num2) {
-        assureMin0Max100(num1);
-        assureMin0Max100(num2);
+        assureCondition(num1);
+        assureCondition(num2);
         return num1 / num2;
     }
 
-    private void assureMin0Max100(int num) {
-        if (0 < num && num <= 100) { return; }
-        throw new IllegalArgumentException("Number must be between 0 and 100");
+    private void assureCondition(int num) {
+        int MIN = 0;
+        int MAX = 100;
+        boolean isMinInclusive = false;
+        boolean isMaxInclusive = true;
+        assureCondition(num, isMinInclusive, MIN, isMaxInclusive, MAX);
+    }
+
+    private static void assureCondition(int num, boolean isMinInclusive, int MIN, boolean isMaxInclusive, int MAX) {
+        boolean minOk = isMinInclusive ? num >= MIN : num > MIN;
+        boolean maxOk = isMaxInclusive ? num <= MAX : num < MAX;
+
+        if (!(minOk && maxOk)) {
+            throw new IllegalArgumentException(
+                    String.format("Number %d is out of range %d %s %d %s %d",
+                            num, MIN, minOk ? "<=" : "<", num, isMaxInclusive ? "<=" : "<", MAX)
+            );
+        }
     }
 }
