@@ -7,11 +7,22 @@ class Solution {
     }
 
     private void assureCondition(int num) {
-        int MAX = 50000;
         int MIN = -50000;
+        int MAX = 50000;
+        boolean isMinInclusive = true;
+        boolean isMaxInclusive = true;
+        assureCondition(num, isMinInclusive, MIN, isMaxInclusive, MAX);
+    }
 
-        if (MIN > num || num > MAX) {
-            throw new IllegalArgumentException("Number must be between 0 and 100");
+    private static void assureCondition(int num, boolean isMinInclusive, int MIN, boolean isMaxInclusive, int MAX) {
+        boolean minOk = isMinInclusive ? num >= MIN : num > MIN;
+        boolean maxOk = isMaxInclusive ? num <= MAX : num < MAX;
+
+        if (!(minOk && maxOk)) {
+            throw new IllegalArgumentException(
+                    String.format("Number %d is out of range %d %s %d %s %d",
+                            num, MIN, minOk ? "<=" : "<", num, isMaxInclusive ? "<=" : "<", MAX)
+            );
         }
     }
 }
