@@ -1,21 +1,13 @@
-import java.util.Arrays;
+import java.util.stream.Collectors;
 
 class Solution {
     public String solution(String my_string, int n) {
         assureCondition(my_string.length(), true, 2, true, 5);
         assureCondition(n, true, 2, true, 10);
-        
-        return Arrays.stream(my_string.split(""))
-                .map(s -> s.repeat(n))
-                .reduce("", String::concat);
-    }
 
-    private static void assureCondition(int num) {
-        int MIN = 1;
-        int MAX = 10;
-        boolean isMinInclusive = true;
-        boolean isMaxInclusive = true;
-        assureCondition(num, isMinInclusive, MIN, isMaxInclusive, MAX);
+        return my_string.chars()
+                .mapToObj(c -> String.valueOf((char) c).repeat(n))
+                .collect(Collectors.joining());
     }
 
     private static void assureCondition(int num, boolean isMinInclusive, int MIN, boolean isMaxInclusive, int MAX) {
