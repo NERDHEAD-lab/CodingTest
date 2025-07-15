@@ -1,15 +1,23 @@
-import java.util.Arrays;
-
 class Solution {
     public String solution(int age) {
         assureCondition(age);
 
-        // int 인 상태로 10씩 나눠 가며 계산하는게 성능적으론 좋지만, 이방법이 가독성은 좋음
-        return Arrays.stream(String.valueOf(age).split(""))
-                .mapToInt(Integer::parseInt)
-                .mapToObj(num -> (char) ('a' + num))
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
-                .toString();
+        if (age == 0) return "a";
+
+        StringBuilder sb = new StringBuilder();
+        int n = age;
+        // 가장 높은 자리부터 처리
+        int divisor = 1;
+        while (n / divisor >= 10) divisor *= 10;
+
+        while (divisor > 0) {
+            int digit = n / divisor;
+            sb.append((char)('a' + digit));
+            n %= divisor;
+            divisor /= 10;
+        }
+
+        return sb.toString();
     }
 
     private static void assureCondition(int num) {
