@@ -4,21 +4,11 @@ class Solution {
         final int MAJOR_ANT_DMG = 5;
         final int SOLDIER_ANT_DMG = 3;
         final int ANT_DMG = 1;
-        int answer = 0;
-        while (hp > 0) {
-            if (hp >= MAJOR_ANT_DMG) {
-                hp -= MAJOR_ANT_DMG;
-                answer++;
-            } else if (hp >= SOLDIER_ANT_DMG) {
-                hp -= SOLDIER_ANT_DMG;
-                answer++;
-            } else {
-                hp -= ANT_DMG;
-                answer++;
-            }
-        }
 
-        return answer;
+
+        return hp / MAJOR_ANT_DMG +
+                (hp % MAJOR_ANT_DMG) / SOLDIER_ANT_DMG +
+                (hp % MAJOR_ANT_DMG) % SOLDIER_ANT_DMG / ANT_DMG;
     }
 
     private static void assureCondition(int num) {
