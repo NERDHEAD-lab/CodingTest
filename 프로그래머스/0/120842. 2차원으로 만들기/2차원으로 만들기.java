@@ -1,5 +1,3 @@
-import java.util.stream.IntStream;
-
 class Solution {
     public int[][] solution(int[] num_list, int n) {
         if (num_list.length % n != 0) {
@@ -8,13 +6,11 @@ class Solution {
         assureCondition(num_list.length, true, 0, true, 150);
         assureCondition(n, true, 2, true, num_list.length);
 
-        return IntStream.range(0, num_list.length / n)
-                .mapToObj(i -> {
-                    int start = i * n;
-                    int end = start + n;
-                    return java.util.Arrays.stream(num_list, start, end).toArray();
-                })
-                .toArray(int[][]::new);
+        int[][] result = new int[num_list.length / n][n];
+        for (int i = 0; i < num_list.length; i++) {
+            result[i / n][i % n] = num_list[i];
+        }
+        return result;
     }
 
     private static void assureCondition(int num, boolean isMinInclusive, int MIN, boolean isMaxInclusive, int MAX) {
