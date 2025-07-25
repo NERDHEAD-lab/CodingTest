@@ -1,15 +1,15 @@
 class Solution {
     public int solution(int[] box, int n) {
-//        if (box == null || box.length != 3) {
-//            throw new IllegalArgumentException("Box must have exactly 3 dimensions.");
-//        }
-//        for (int dimension : box) {
-//            assureCondition(dimension);
-//            if (n <= dimension) continue;
-//
+        if (box == null || box.length != 3) {
+            throw new IllegalArgumentException("Box must have exactly 3 dimensions.");
+        }
+        for (int dimension : box) {
+            assureCondition(dimension);
+            if (n <= dimension) continue;
+
 //            throw new IllegalArgumentException("n must be less than or equal to each dimension of the box.");
-//        }
-//        assureCondition(n, true, 1, true, 50);
+        }
+        assureCondition(n, true, 1, true, 50);
 
         int width = box[0];
         int height = box[1];
